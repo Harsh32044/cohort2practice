@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interest</title>
+</head>
+<body>
+    <form action="action.php" id="simpleIntrstForm">
+        <br>
+        Principal Amount <input oninput="debounceFindingSI()" type="text" id="principal" placeholder="Enter Principal Amount"><br><br>
+        Rate of Interest <input oninput="debounceFindingSI()" type="text" id="roi" placeholder="Enter Rate of Interest"><br><br>
+        Time Period <input oninput="debounceFindingSI()" type="text" id="time" placeholder="Enter Time Period"><br><br>
+        <!-- <button onclick="findSI()">Calculate Simple Interest</button> -->
+    </form>
+    <br><br>
+    <div id="resultDiv"></div>
+    <script>
+        let clock = 0;
+        function findSI() {
+            let principal = document.getElementById("principal").value;
+            let rate = document.getElementById("roi").value
+            let time = document.getElementById("time").value
+
+            let SI = (parseFloat(principal) * parseFloat(rate) * parseFloat(time)) / 100 
+
+            document.getElementById("resultDiv").innerHTML = `Simple Interest with given values: ${SI}`
+        }
+        function debounceFindingSI() {
+            // Delay the call to findSI until debouncer hasn't been
+            // called for 100ms, and debouncer has been called atleast
+            // Once
+
+            clearTimeout(clock)
+            clock = setTimeout(() => findSI(), 1000)
+        }
+        
+
+    </script>
+</body>
+</html>

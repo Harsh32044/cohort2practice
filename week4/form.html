@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with DOM</title>
+</body>
+
+<form action="/action_page.php" id="LoginForm">
+    First Name: <input type="text" name="fname" value="Donald"><br>
+    Last Name: <input type="text" name="lname" value="Duck"><br>
+    <input type="submit" value="Submit">
+</form>
+<p>Click "Try it" to display number of elements in the form</p>
+
+<button onclick="myFun()">Try It</button>
+
+<script>
+    function myFun() {
+        let x = document.getElementById("LoginForm").elements.length;
+        let y = document.getElementById("LoginForm").elements[1].value;
+
+        const para = document.createElement("p")
+        para.id = "displayspace"
+        document.body.appendChild(para)
+
+        document.getElementById("displayspace").innerHTML = `Found ${x} elements in the form. Last Name entered 
+        is ${y}`;
+    }
+</script>
+</html>
