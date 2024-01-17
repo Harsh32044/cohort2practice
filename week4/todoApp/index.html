@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO App</title>
+</head>
+<body>
+    <script>
+        let globalID = 1
+        function addTodo() {
+            const title = document.getElementById("title").value
+            const description = document.getElementById("description").value
+
+            document.getElementById("container").appendChild(createChild(title, description, globalID++))
+        }
+
+        function createChild(title, description, id) {
+            const divMain = document.createElement("div")
+            const titleDiv = document.createElement("div")
+            const descDiv = document.createElement("div")
+            const markBtn = document.createElement("button")
+
+            divMain.setAttribute("id", id)
+            titleDiv.innerHTML = title
+            descDiv.innerHTML = description
+            markBtn.setAttribute("onclick", `markDone(${id})`)
+            markBtn.innerHTML = "Mark as Done"
+
+            divMain.appendChild(titleDiv)
+            divMain.appendChild(descDiv)
+            divMain.appendChild(markBtn)
+
+            return divMain
+        }
+
+        function markDone(id) {
+            const divSelected = document.getElementById(id)
+            const btn = divSelected.querySelector("button")
+            btn.innerHTML="Done!"
+        }
+
+        function updateDomAccToState(state) {
+
+            document.getElementById("container").innerHTML = ""
+            
+            for (let i = 0; i<state.length; i++) {
+                const divMain = document.createElement("div")
+                const titleDiv = document.createElement("div")
+                const descDiv = document.createElement("div")
+                const doneButton = document.createElement("button")
+
+                titleDiv.innerHTML = state[i].title
+                descDiv.innerHTML = state[i].description
+                divMain.setAttribute("id", state[i].id)
+                doneButton.setAttribute("onclick", `markDone(${id})`)
+
+                divMain.appendChild(titleDiv)
+                divMain.appendChild(descDiv)
+                divMain.appendChild(doneButton)
+
+                document.getElementById("container").appendChild(divMain)
+            }
+        }
+    </script>
+    <div>
+        <input type="text" name="title" id="title" placeholder="title"><br><br>
+        <input type="text" name="description" id="description" placeholder="description"><br><br>
+        <button onclick="addTodo()">Add ToDo</button>
+        <br><br>
+        <div id="container">
+        </div>
+    </div>
+</body>
+</html>
