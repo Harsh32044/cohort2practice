@@ -1,0 +1,17 @@
+.circle-button {
+    width: 50px; /* Set the width and height to the same value for a perfect circle */
+    height: 50px;
+    border-radius: 50%; /* Set border-radius to 50% to create a circle */
+    background-color: #3498db; /* Set background color as desired */
+    color: #fff; /* Set text color as desired */
+    text-align: center; /* Center text horizontally within the circle */
+    line-height: 50px; /* Center text vertically within the circle */
+    text-decoration: none; /* Remove underlines from links if needed */
+    display: inline-block; /* Make the button behave like an inline block */
+    font-size: 2.5rem;
+  }
+  
+  /* Hover effect (optional) */
+  .circle-button:hover {
+    background-color: #2980b9; /* Change background color on hover */
+  }
