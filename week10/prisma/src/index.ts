@@ -71,10 +71,54 @@ async function getUserDetails(username:string) {
     console.log(res)
 }
 
+// Add some data in todos table
+
+async function addTodo(userId: number) {
+    await prisma.todo.create({
+        data: {
+            title: "First Todo Item",
+            description: "Description of this first item",
+            userId
+        }
+    })
+}
+
+//Delete a todo by its ID
+
+async function deleteTodoById(id: number) {
+    await prisma.todo.delete({
+        where: {
+            id
+        }
+    })
+}
+
+
+// Get all todos for a given userId
+
+async function getTodosOfUser(userId: number) {
+
+    const res = await prisma.todo.findMany({
+        where : {
+            userId
+        },
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            user: true
+        }
+    })
+    console.log(res);
+}
+
 // insertUser("Sam.M@gmail.com", "changeinprod4!","Samuel", "Clemens")
 // insertUser("jacobcraig", "changeinprod2!","Jacob", "Craig")
 // updateUser("Sam.M@gmail.com", {firstName: "Sam", lastName: "Manekshaw"})
 // deleteUser("jacobcraig")
+// getUserDetails("Sam.M@gmail.com")
+// getUserDetails("Sam.M@gmail.co")
+addTodo(1)
 
-getUserDetails("Sam.M@gmail.com")
-getUserDetails("Sam.M@gmail.co")
+// getTodosOfUser(10)
+// deleteTodoById(2)
