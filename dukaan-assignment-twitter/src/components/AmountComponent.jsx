@@ -16,7 +16,7 @@ export default function AmountComponent({ title, amount, orders }) {
 
   return (
     <div
-      className="bg-blue-700 rounded-md text-gray-300 bg-blue-700:shadow-xl"
+      className="bg-blue-700 rounded-md text-gray-300 shadow-lg"
       style={style}
     >
       <div className="flex items-center px-3 py-3">

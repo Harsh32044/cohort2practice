@@ -18,7 +18,7 @@ const pg_1 = require("pg");
 //     password: 'changeinprod!',
 // })
 const client = new pg_1.Client({
-    connectionString: "postgresql://postgres:changeinprod!@localhost/postgres",
+    connectionString: "postgresql://Harsh32044:VnNhl2Mx9vwF@ep-wispy-wind-32896131.ap-southeast-1.aws.neon.tech/neondb?sslmode=require",
 });
 //Async function to create a users table
 function createTableUsers() {
@@ -26,12 +26,35 @@ function createTableUsers() {
         yield client.connect();
         const res = yield client.query(`CREATE TABLE users (id SERIAL PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);`);
         console.log(res);
     });
 }
-// createTableUsers()
+function createTableAddresses() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield client.connect();
+            const res = yield client.query(`CREATE TABLE addresses (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL,
+        city VARCHAR(100) NOT NULL,
+        country VARCHAR(100) NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        pincode VARCHAR(20),
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    );`);
+            console.log(res);
+        }
+        catch (error) {
+            console.log("Error connecting to DB", error);
+        }
+    });
+}
+// createTableUsers();
+createTableAddresses();
 function insertData(name, email) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -75,4 +98,4 @@ function getData(email) {
         }
     });
 }
-getData("issac.newton@gmail.com");
+// getData("issac.newton@gmail.com");
